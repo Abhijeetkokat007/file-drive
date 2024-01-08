@@ -1,0 +1,29 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+code {
+font-family: source-code-pro, menaco, menlo, Consolas, 'Courier New', monospace;
+}
+
+.App{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+  flex-direction: column;
+}
+.formStyle{
+  padding: 20px;
+  border: 1px solid black;
+  width: 25%;
+  text-align: center;
+}
+.form-control{
+  border-color: black !important;
+}
