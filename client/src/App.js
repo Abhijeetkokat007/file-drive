@@ -4,6 +4,7 @@ import { pdfjs } from "react-pdf";
 import PdfComp from "./PdfComp";
 import "./App.css";
 import upload from './upload.jpg';
+import showToast from 'crunchy-toast';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
@@ -21,7 +22,7 @@ function App() {
   }, []);
   const getPdf = async () => {
     const result = await axios.get("http://localhost:5000/get-files");
-    console.log(result.data.data);
+   
     setAllImage(result.data.data);
   };
 
@@ -30,7 +31,7 @@ function App() {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("file", file);
-    console.log(title, file);
+   
 
     const result = await axios.post(
       "http://localhost:5000/upload-files",
@@ -39,12 +40,14 @@ function App() {
         headers: { "Content-Type": "multipart/form-data" },
       }
     );
-    console.log(result);
+    // console.log(result);
     if (result.data.status == "ok") {
-      alert("Uploaded Successfully!!!");
+      // alert("Uploaded Successfully!!!");
+      showToast('Uploaded Successfully!!!', 'success', 3000);
       getPdf();
     }
   };
+  
   const showPdf = (pdf) => {
     // window.open(`http://localhost:5000/files/${pdf}`, "_blank", "noreferrer");
     setPdfFile(`http://localhost:5000/files/${pdf}`)
