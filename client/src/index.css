@@ -20,7 +20,7 @@ code {
 }
 .formStyle{
   padding: 20px;
-  border: 2px dotted 	 #335eea;
+  border: 2px dotted #335eea !important;
   width: 25%;
   text-align: center;
   border-radius: 5px;
@@ -32,7 +32,9 @@ code {
 }
 
 .input-box{
-  border: 1px solid #335eea;
+  /* display: block; */
+  width: 88%;
+  border: 2px solid #335eea;
   padding:5px 10px;
   border-radius: 5px;
   margin: 10px;
@@ -55,7 +57,7 @@ code {
 
 .pdf-div{
   padding: 50px;
-  background-color: #dedede;
+  background-color: 	  #e8edfd;
   margin-top: 50px;
 }
 canvas.react-pdf__Page__canvas {

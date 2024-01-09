@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { pdfjs } from "react-pdf";
 import PdfComp from "./PdfComp";
+import "./App.css";
+import upload from './upload.jpg';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
@@ -49,8 +51,12 @@ function App() {
   };
   return (
     <div className="App">
+      <h1 className="title-text">File<span className="subtitle">Drive</span> </h1>
       <form className="formStyle" onSubmit={submitImage}>
-        <h4>Upload Pdf in React</h4>
+        <h4>
+          <img src={upload} alt="upload" className="upload-img" height="100px" /> <br/>
+          Upload
+        </h4>
         <br />
         <input
           type="text"
@@ -62,13 +68,13 @@ function App() {
         <br />
         <input
           type="file"
-          class="form-control"
+          class="form-control input-box"
           accept="application/pdf"
           required
           onChange={(e) => setFile(e.target.files[0])}
         />
         <br />
-        <button class="btn btn-primary" type="submit">
+        <button class="btn-submit ma-t20" type="submit">
           Submit
         </button>
       </form>
@@ -82,7 +88,7 @@ function App() {
                   <div className="inner-div">
                     <h6>Title: {data.title}</h6>
                     <button
-                      className="btn btn-primary"
+                      className="btn-submit"
                       onClick={() => showPdf(data.pdf)}
                     >
                       Show Pdf
