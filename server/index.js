@@ -1,16 +1,112 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-
+import cors from "cors";
+import multer from "multer";
+import schemaPdf from "./models/schemaPdf.js"
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
+app.use("/files", express.static("files"));
 
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect(process.env.MONGOODB_URI, {
+        const conn = await mongoose.connect(process.env.MONGOODB_URI
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            , {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
@@ -24,6 +120,50 @@ const connectDB = async () => {
 };
 
 
+
+// multer ------------------------------------------------------------
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "./files");
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now();
+        cb(null, uniqueSuffix + file.originalname);
+    },
+});
+
+// const PdfSchema = mongoose.model("PdfDetails");
+const upload = multer({ storage: storage });
+
+// api -------------------------->
+app.post("/upload-files", upload.single("file"), async (req, res) => {
+    console.log(req.file);
+    const title = req.body.title;
+    const fileName = req.file.filename;
+    try {
+        await schemaPdf.create({ title: title, pdf: fileName });
+        res.send({ status: "ok" });
+    } catch (error) {
+        res.json({ status: error });
+    }
+});
+
+app.get("/get-files", async (req, res) => {
+    try {
+        schemaPdf.find({}).then((data) => {
+            res.send({ status: "ok", data: data });
+        });
+    } catch (error) {
+     
+        console.error(error);
+        res.status(500).json({ status: "error", message: "Internal Server Error" });
+    }
+});
+
+
+app.get("/", async (req, res) => {
+    res.send("Success!!!!!!");
+});
 
 const PORT = 5000;
 
