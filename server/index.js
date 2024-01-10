@@ -4,9 +4,10 @@ import dotenv from "dotenv";
 import cors from "cors";
 import multer from "multer";
 import schemaPdf from "./models/schemaPdf.js"
+import path from "path";    
 
 dotenv.config();
-
+const __dirname = path.resolve();
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -15,97 +16,7 @@ app.use("/files", express.static("files"));
 const connectDB = async () => {
     try {
         const conn = await mongoose.connect(process.env.MONGOODB_URI
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+    
             , {
             useNewUrlParser: true,
             useUnifiedTopology: true,
@@ -164,6 +75,14 @@ app.get("/get-files", async (req, res) => {
 app.get("/", async (req, res) => {
     res.send("Success!!!!!!");
 });
+
+if(process.env.NODE_ENV === "production"){
+    app.use(Express.static(path.join(__dirname, '..', 'client', 'build'))); 
+   
+    app.get('*', (req, res) => {
+     res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'))
+    });
+   }
 
 const PORT = 5000;
 
