@@ -35,7 +35,7 @@ const connectDB = async () => {
 // multer ------------------------------------------------------------
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "./files");
+        cb(null, "./api/files");
     },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now();
@@ -72,8 +72,8 @@ app.get("/get-files", async (req, res) => {
 });
 
 
-app.get("/", async (req, res) => {
-    res.send("Success!!!!!!");
+app.get("/api", async (req, res) => {
+    res.send("Success!!!");
 });
 
 if(process.env.NODE_ENV === "production"){
